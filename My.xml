@@ -1,0 +1,28 @@
+<?xml version="1.0"?><xml xmlns="https://developers.google.com/blockly/xml">  <!-- Start block --><block type="start" id="start_block" x="50" y="50"></block>
+
+  <!-- Trade definition block -->  <block type="trade" id="trade_block" inline="false">
+    <field name="SYMBOL">R_10</field>
+    <field name="TRADETYPE">CALL</field>
+    <field name="DURATIONTYPE">t</field>
+    <field name="DURATION">1</field>
+    <field name="AMOUNT">0.35</field>
+  </block>  <!-- Time filter: only trade between 2AM - 4AM UTC -->  <block type="controls_if" id="time_filter">
+    <comment pinned="true" h="60" w="300">Only trade between 02:00 - 04:00 UTC</comment>
+  </block>  <!-- Entry Signal: Only trade when last digit is 7 -->  <block type="controls_if" id="entry_signal">
+    <comment pinned="true" h="60" w="300">Only trade when last digit is 7</comment>
+  </block>  <!-- Purchase Rise/Fall -->  <block type="purchase_contract" id="purchase_block">
+    <field name="CONDITION">rise</field>
+  </block>  <!-- After Purchase (Martingale logic) -->  <block type="after_purchase" id="martingale_block">
+    <field name="AFTERPURCHASE">loss</field>
+    <comment pinned="true" h="60" w="300">Martingale logic x2, max 3 steps</comment>
+  </block>  <!-- Custom stake sequence logic (placeholder) -->  <block type="variables_set" id="stake_sequence">
+    <comment pinned="true" h="60" w="300">Custom stake sequence: 0.35 → 0.7 → 1.4 → 2.8</comment>
+  </block>  <!-- Stop-Loss logic -->  <block type="controls_if" id="stop_loss">
+    <comment pinned="true" h="60" w="300">Stop if total loss &gt;= $5</comment>
+  </block>  <!-- Take-Profit logic -->  <block type="controls_if" id="take_profit">
+    <comment pinned="true" h="60" w="300">Stop if total profit &gt;= $10</comment>
+  </block>  <!-- Pause block -->  <block type="controls_wait" id="pause_block">
+    <comment pinned="true" h="60" w="300">Pause 2 seconds after each trade</comment>
+  </block>  <!-- Alert/Notification -->  <block type="notify" id="alert_block">
+    <comment pinned="true" h="60" w="300">Play sound or show alert on win/loss</comment>
+  </block>  <!-- Auto loop -->  <block type="trade_again" id="auto_loop" /></xml>
