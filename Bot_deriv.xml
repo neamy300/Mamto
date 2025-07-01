@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deriv_bot>
+  <!-- Bot settings -->
+  <name>rise_fall_bot</name>
+  <symbol>USDT</symbol>
+  <exchange>deriv</exchange>
+  <leverage>10</leverage>
+  <risk_management>
+    <martingale>true</martingale>
+    <stop_loss>0.1</stop_loss>
+    <take_profit>0.5</take_profit>
+    <trailing_stop>true</trailing_stop>
+    <trailing_stop_distance>0.05</trailing_stop_distance>
+  </risk_management>
+
+  <!-- Strategy settings -->
+  <strategy>
+    <type>rise_fall</type>
+    <period>1m</period>
+    <volatility>
+      <volatility_10>10</volatility_10>
+      <volatility_25>25</volatility_25>
+    </volatility>
+    <emotional_trading>
+      <fear>true</fear>
+      <greed>true</greed>
+    </emotional_trading>
+  </strategy>
+
+  <!-- AI settings -->
+  <ai>
+    <model>MLP</model>
+    <input_features>
+      <feature>open</feature>
+      <feature>high</feature>
+      <feature>low</feature>
+      <feature>close</feature>
+      <feature>volume</feature>
+      <feature>rsi</feature>
+      <feature>macd</feature>
+    </input_features>
+    <output_features>
+      <feature>buy</feature>
+      <feature>sell</feature>
+    </output_features>
+  </ai>
+
+  <!-- Trading settings -->
+  <trading>
+    <trading_interval>1m</trading_interval>
+    <trading_volume>0.1</trading_volume>
+    <trading_size>0.05</trading_size>
+    <lot_size>100</lot_size>
+  </trading>
+
+  <!-- Notification settings -->
+  <notification>
+    <email>false</email>
+    <telegram>false</telegram>
+    <discord>false</discord>
+  </notification>
+
+  <!-- Logging settings -->
+  <logging>
+    <log_level>INFO</log_level>
+    <log_interval>1m</log_interval>
+  </logging>
+
+  <!-- Backtesting settings -->
+  <backtesting>
+    <backtesting_interval>1m</backtesting_interval>
+    <backtesting_volume>0.1</backtesting_volume>
+    <backtesting_size>0.05</backtesting_size>
+  </backtesting>
+</deriv_bot>
