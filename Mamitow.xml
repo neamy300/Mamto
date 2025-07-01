@@ -1,0 +1,91 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <!-- Market: Volatility 10 (1s) -->
+  <block type="trade_definition_market" x="10" y="10">
+    <field name="MARKET_LIST">volatility_index</field>
+    <field name="SUBMARKET_LIST">synthetic_index</field>
+    <field name="SYMBOL_LIST">R_10</field>
+  </block>  <!-- Trade Type: Rise/Fall -->  <block type="trade_definition_trade_type" x="10" y="100">
+    <field name="TRADETYPE_LIST">CALL</field>
+  </block>  <!-- Trade Settings -->  <block type="trade_definition" x="10" y="200">
+    <field name="DURATIONTYPE_LIST">t</field>
+    <field name="DURATION">1</field>
+    <field name="BASIS_LIST">stake</field>
+    <field name="AMOUNT">0.35</field>
+  </block>  <!-- User Manual Control: Only Buy When TRUE -->  <block type="variables_set" x="10" y="300">
+    <field name="VAR">manual_buy</field>
+    <value name="VALUE">
+      <block type="logic_boolean">
+        <field name="BOOL">FALSE</field>
+      </block>
+    </value>
+  </block>  <!-- Condition: Only buy if manual_buy == TRUE -->  <block type="controls_if" x="10" y="400">
+    <value name="IF0">
+      <block type="logic_compare">
+        <field name="OP">EQ</field>
+        <value name="A">
+          <block type="variables_get">
+            <field name="VAR">manual_buy</field>
+          </block>
+        </value>
+        <value name="B">
+          <block type="logic_boolean">
+            <field name="BOOL">TRUE</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <statement name="DO0">
+      <block type="controls_if">
+        <value name="IF0">
+          <block type="time_is_between">
+            <field name="FROM_HOUR">2</field>
+            <field name="FROM_MIN">0</field>
+            <field name="TO_HOUR">4</field>
+            <field name="TO_MIN">0</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="controls_if">
+            <value name="IF0">
+              <block type="logic_compare">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="read_stream_digit">
+                    <field name="DIGIT_POSITION">last</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number">
+                    <field name="NUM">7</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="controls_if">
+                <value name="IF0">
+                  <block type="logic_compare">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="read_ohlc">
+                        <field name="OHLC_FIELD">direction</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="text">
+                        <field name="TEXT">up</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="trade"></block>
+                </statement>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>  <!-- Martingale Logic -->  <block type="money_martingale" x="10" y="1000">
+    <field name="MULTIPLIER">2</
