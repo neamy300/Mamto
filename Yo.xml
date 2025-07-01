@@ -1,0 +1,23 @@
+import xml.etree.ElementTree as ET
+
+def generate_xml():
+    # Create XML elements
+    root = ET.Element("deriv_bot")
+    name = ET.SubElement(root, "name")
+    name.text = "Deriv Bot"
+    symbol = ET.SubElement(root, "symbol")
+    symbol.text = "USDT"
+    leverage = ET.SubElement(root, "leverage")
+    leverage.text = "10"
+    stop_loss = ET.SubElement(root, "stop_loss")
+    stop_loss.text = "0.1"
+    take_profit = ET.SubElement(root, "take_profit")
+    take_profit.text = "0.5"
+    trading_interval = ET.SubElement(root, "trading_interval")
+    trading_interval.text = "1m"
+
+    # Save XML file
+    tree = ET.ElementTree(root)
+    tree.write("deriv_bot.xml")
+
+generate_xml()
